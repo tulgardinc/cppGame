@@ -1,0 +1,3 @@
+#+title:  CPP Text Adventure
+
+An adventure game I am creating using c++ in order to learn the langauge.
