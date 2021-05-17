@@ -14,8 +14,7 @@ using namespace std;
 
 
 int main() {
-
-  // Initialize player
+ clearScr();
 
   // Initialize Rooms
   TestL testl;

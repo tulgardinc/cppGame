@@ -11,27 +11,39 @@ using namespace std;
 
 Item::Item(int _id) {
 
-  // 0: none
-  // 1: puzzle
-  // 2: consumable
-  // 3: weraable
-  // 4: weapon
+  // types:
+  // 0: puzzle
+  // 1: consumable
+  // 2: weapon
+  // 3: helmet
+  // 4: torso
+  // 5: leggings
+  // 6: shoes
 
   id = _id;
 
   switch (_id) {
   case 0:
-    name = "Empty";
-    type = 0;
-    desc = "Your bare hands";
-    prop = 0;
-    break;
-  case 1:
     name = "Broken Sword";
-    type = 3;
+    type = 2;
     desc = "An old, rusty sword. Broken halfway, and covered in dried "
            "blood... Better than nothing.";
     prop = 5;
+    break;
+  case 1:
+    name = "Health Potion";
+    type = 1;
+    desc = "A potion used to rapidly heal wounds. It is not the strongest but "
+           "it will do.";
+    dia = "You applied the health potion to your wounds. It sooths your pane.";
+    prop = 5;
+    break;
+  case 2:
+    name = "Helmet";
+    type = 3;
+    desc = "Old style knight helmet. Its rusted, the face guard is split in half, and the inside is covered in old, dried blood ";
+    dia = "You applied the health potion to your wounds. It sooths your pane.";
+    prop = 25;
     break;
   default:
     name = "Buuugin";

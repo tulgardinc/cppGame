@@ -1,6 +1,3 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -18,25 +15,39 @@ using namespace std;
 
 class Player {
 public:
-  int health;
+  int maxHealth;
+  int curHealth;
+  int def = 0;
   vector<Item *> inv;
-  vector<Item *> clothes;
+  array<Item *, 4> clothes;
   Room *curRoom;
   Item *eqp;
 
-  Player(int _health, vector<Item *> _inv, vector<Item *> _clothes);
+  Player(int _health, vector<Item *> _inv, array<Item *, 4> _clothes, Item* _eqp);
+
+  Item* findItemInv(string name);
+
+  void removeFromInv(Item* i);
 
   void moveTo(Room *room);
 
   void takeDamage(int dmg);
 
-  void consume(Item *item);
+  void use(string name);
 
-  void takeItem(Item *item);
+  void takeItem(string name);
 
-  void equipItem(Item *item);
+  void equipItem(string name);
+
+  void check();
+
+  void inspect(string name);
+
+  void calcDef();
+
+  void unequip(string name);
+
+  void discard(string name);
 };
 
 extern Player player;
-
-#endif

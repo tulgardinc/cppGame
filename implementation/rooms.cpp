@@ -19,8 +19,7 @@ void Room::setValues(string _n, vector<Obj *> _o, vector<Item *> _i) {
 
 TestL::TestL() {
     // Setup the contents
-    Item *sword = new Item(1);
-    Chest *chest = new Chest({sword}, false);
+  Chest *chest = new Chest({new Item(0), new Item(2)}, false);
     vector<Obj *> _objects{chest};
     setValues("TestL", _objects, vector<Item *>());
   }

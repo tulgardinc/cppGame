@@ -12,7 +12,7 @@ using namespace std;
 
 class Item {
 public:
-  string desc, name;
+  string desc, name, dia;
   int type, prop, id;
 
   Item(int _id);

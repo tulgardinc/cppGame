@@ -5,18 +5,34 @@
 #include <vector>
 
 #include "../headers/header.h"
-#include "../headers/player.h"
 #include "../headers/item.h"
 #include "../headers/objects.h"
+#include "../headers/player.h"
 
 using namespace std;
+
+Obj *findObj(string name) {
+  for (auto obj : player.curRoom->objects) {
+    if (obj->name == name) {
+      return obj;
+    } else {
+      cout << "No chest in the room to open." << endl;
+      prompt();
+      return nullptr;
+    }
+  }
+  cout << "No chest in the room to open." << endl;
+  prompt();
+  return nullptr;
+}
 
 void prompt() {
   string ans;
   cout << endl;
   cout << "-----------------" << endl;
   cout << "What will you do?" << endl;
-  cout << ": ";
+  cout << "(" << player.curHealth << "/" << player.maxHealth << " HP)"
+       << " : ";
   getline(cin, ans);
   ans = _toLower(ans);
   cout << endl;
@@ -34,79 +50,67 @@ void prompt() {
   // Switch can not be used on strings so if else is the only way
 
   if (cmd == "actions") {
-    cout << "actions - Displays all possible actions" << endl;
-    cout << "look - Looks around the current area" << endl;
-    cout << "check - Makes player check their status" << endl;
-    cout << "consume <item> - Consumes the item from inventory" << endl;
-    cout << "open <obj> - opens objects like chests, boxes, or doors" << endl;
-    cout << "take <item> - takes item and adds to inventory" << endl;
-    cout << "equip <item> - equip item form inventory" << endl;
+    cout << "actions - Displays all possible actions." << endl;
+    cout << "look - Looks around the current area." << endl;
+    cout << "check - Makes player check their status." << endl;
+    cout << "use <item> - Uses an item from the inventory." << endl;
+    cout << "open <obj> - Opens objects like chests, boxes, or doors." << endl;
+    cout << "inspect <item> - Inspects the item." << endl;
+    cout << "take <item> - Takes item and adds to inventory." << endl;
+    cout << "equip <item> - Equip item form inventory." << endl;
+    cout << "unequip <item> - Unequip item form inventory." << endl;
+    cout << "discard <item> - Discard an item from your inventory (forever)."
+         << endl;
     prompt();
-  } else if (cmd == "look") {
+  } else if (cmd == "check") {
+    clearScr();
+    player.check();
+    prompt();
+
+  } else if (cmd == "inspect") {
+    if (param != "") {
+
+      player.inspect(param);
+      prompt();
+
+    } else {
+      cout << "What will you inspect?" << endl;
+      cout << "Usage: inspect <item>" << endl;
+      prompt();
+    }
 
   } else if (cmd == "look") {
 
-  } else if (cmd == "consume") {
+  } else if (cmd == "use") {
+
+    if (param != "") {
+
+      player.use(param);
+
+      prompt();
+
+    } else {
+      cout << "What will you use?" << endl;
+      cout << "Usage: use <item>" << endl;
+      prompt();
+    }
 
   } else if (cmd == "open") {
     if (param == "chest") {
       vector<Obj *> objs = player.curRoom->objects;
-      Chest *c;
 
-      for (auto obj : objs) {
-        if (obj->name == "chest") {
-          c = static_cast<Chest *>(obj);
-          if (c->open) {
-            cout << "Chest is already open." << endl;
-          }
-          break;
-        } else {
-          cout << "No chest in the room to open." << endl;
-          prompt();
-        }
-      }
+      Obj *o = findObj("chest");
 
-      cout << "You move over to the chest and open it." << endl;
-      cout << "Inside you can see..." << endl;
-      cout << endl;
-      cout << "----+---+---+----" << endl;
+      Chest *c = static_cast<Chest *>(o);
 
-      for (auto &item : c->content) {
-        cout << item->name << endl;
-      }
-
-      // Add the chest content to the room items
-      Item *i = c->content[0];
-
-      vector<Item *> *roomItems = &player.curRoom->items;
-      roomItems->insert(roomItems->end(), c->content.begin(), c->content.end());
-
-      cout << "----+---+---+----" << endl;
+      c->open();
 
       prompt();
     }
   } else if (cmd == "take") {
     if (param != "") {
 
-      vector<Item *>& items = player.curRoom->items;
-      Item *i;
-
-      for (auto item : items) {
-        if (_toLower(item->name) == param) {
-          i = item;
-          break;
-        } else {
-          cout << "Item not present in the room." << endl;
-          prompt();
-        }
-      }
-
-
-      player.takeItem(i);
-      items.erase(find(items.begin(), items.end(), i));
-
-      cout << "You took \"" << i->name << "\"." << endl;
-
+      player.takeItem(param);
       prompt();
 
     } else {
@@ -118,32 +122,37 @@ void prompt() {
   } else if (cmd == "equip") {
     if (param != "") {
 
-      vector<Item *>& inv = player.inv;
-      Item *i;
-
-      for (auto item : inv) {
-        if (_toLower(item->name) == param) {
-          i = item;
-          break;
-        } else {
-          cout << "Item not present in inventory." << endl;
-          prompt();
-        }
-      }
-
-
-      player.equipItem(i);
-
-      cout << "You equipped \"" << i->name << "\"." << endl;
-
+      player.equipItem(param);
       prompt();
+
     } else {
+
       cout << "What will you equip?" << endl;
       cout << "usage: equip <item>" << endl;
       prompt();
     }
+  } else if (cmd == "discard") {
+    if (param != "") {
+      player.discard(param);
+      prompt();
+    } else {
+      cout << "What will you discard?" << endl;
+      cout << "Usage: discard <item>" << endl;
+      prompt();
+    }
+  } else if (cmd == "unequip") {
+    if (param != "") {
+      player.unequip(param);
+      prompt();
+    }
+    {
+      cout << "What will you unequip?" << endl;
+      cout << "Usage: unequip <item>" << endl;
+      prompt();
+    }
+  }
 
-  } else {
+  else {
     cout << "Invalid command, please type \"actions\" in order to view a list "
             "of possible actions."
          << endl;

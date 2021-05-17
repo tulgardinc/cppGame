@@ -20,7 +20,9 @@ public:
 class Chest : public Obj {
 public:
   vector<Item *> content;
-  bool open;
+  bool isOpen;
 
   Chest(vector<Item *> _content, bool _open);
+
+  void open();
 };

@@ -11,3 +11,5 @@ using namespace std;
 string _toLower(string str);
 
 void prompt();
+
+void clearScr();
