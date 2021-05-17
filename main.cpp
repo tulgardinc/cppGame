@@ -12,7 +12,6 @@ using namespace std;
 #include "rooms.h"
 #include "player.h"
 
-Player player(50, {}, {});
 
 int main() {
 

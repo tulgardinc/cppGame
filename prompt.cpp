@@ -88,7 +88,7 @@ void prompt() {
   } else if (cmd == "take") {
     if (param != "") {
 
-      vector<Item *> items = player.curRoom->items;
+      vector<Item *>& items = player.curRoom->items;
       Item *i;
 
       for (auto item : items) {
@@ -100,6 +100,7 @@ void prompt() {
           prompt();
         }
       }
+
 
       player.takeItem(i);
       items.erase(find(items.begin(), items.end(), i));
@@ -115,6 +116,33 @@ void prompt() {
     }
 
   } else if (cmd == "equip") {
+    if (param != "") {
+
+      vector<Item *>& inv = player.inv;
+      Item *i;
+
+      for (auto item : inv) {
+        if (_toLower(item->name) == param) {
+          i = item;
+          break;
+        } else {
+          cout << "Item not present in inventory." << endl;
+          prompt();
+        }
+      }
+
+
+      player.equipItem(i);
+
+      cout << "You equipped \"" << i->name << "\"." << endl;
+
+      prompt();
+    } else {
+      cout << "What will you equip?" << endl;
+      cout << "usage: equip <item>" << endl;
+      prompt();
+    }
+
   } else {
     cout << "Invalid command, please type \"actions\" in order to view a list "
             "of possible actions."
