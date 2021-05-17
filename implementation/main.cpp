@@ -6,11 +6,11 @@
 
 using namespace std;
 
-#include "header.h"
-#include "item.h"
-#include "objects.h"
-#include "rooms.h"
-#include "player.h"
+#include "../headers/header.h"
+#include "../headers/item.h"
+#include "../headers/objects.h"
+#include "../headers/rooms.h"
+#include "../headers/player.h"
 
 
 int main() {

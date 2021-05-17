@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <vector>
 
-#include "header.h"
-#include "player.h"
-#include "item.h"
-#include "objects.h"
+#include "../headers/header.h"
+#include "../headers/player.h"
+#include "../headers/item.h"
+#include "../headers/objects.h"
 
 using namespace std;
 

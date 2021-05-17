@@ -6,11 +6,11 @@
 
 using namespace std;
 
-#include "header.h"
-#include "item.h"
-#include "objects.h"
-#include "rooms.h"
-#include "player.h"
+#include "../headers/header.h"
+#include "../headers/item.h"
+#include "../headers/objects.h"
+#include "../headers/rooms.h"
+#include "../headers/player.h"
 
 Player::Player(int _health, vector<Item *> _inv, vector<Item *> _clothes) : health(_health), inv(_inv), clothes(_clothes), eqp(new Item(0)){};
 

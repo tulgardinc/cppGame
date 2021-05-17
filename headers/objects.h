@@ -14,7 +14,7 @@ using namespace std;
 class Obj {
 public:
   string name;
-  void setName(string n) { name = n; }
+  void setName(string n);
 };
 
 class Chest : public Obj {
@@ -22,9 +22,5 @@ public:
   vector<Item *> content;
   bool open;
 
-  Chest(vector<Item *> _content, bool _open) {
-    setName("chest");
-    content = _content;
-    open = _open;
-  }
+  Chest(vector<Item *> _content, bool _open);
 };
