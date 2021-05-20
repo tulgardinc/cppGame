@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -11,14 +12,11 @@
 
 using namespace std;
 
-Obj *findObj(string name) {
-  for (auto obj : player.curRoom->objects) {
+unique_ptr<Obj> findObj(string name) {
+  cout << player.curRoom->objects.size() << endl;
+  for (auto & obj : player.curRoom->objects) {
     if (obj->name == name) {
-      return obj;
-    } else {
-      cout << "No chest in the room to open." << endl;
-      prompt();
-      return nullptr;
+      return move(obj);
     }
   }
   cout << "No chest in the room to open." << endl;
@@ -27,6 +25,11 @@ Obj *findObj(string name) {
 }
 
 void prompt() {
+
+  for (auto & i : player.curRoom->items) {
+    cout << i->name << endl;
+  }
+
   string ans;
   cout << endl;
   cout << "-----------------" << endl;
@@ -97,13 +100,13 @@ void prompt() {
 
   } else if (cmd == "open") {
     if (param == "chest") {
-      vector<Obj *> objs = player.curRoom->objects;
+      unique_ptr<Obj> o = findObj("chest");
 
-      Obj *o = findObj("chest");
-
-      Chest *c = static_cast<Chest *>(o);
-
-      c->open();
+      {
+	Obj* base = o.get();
+	Chest *_c = static_cast<Chest *>(base);
+	_c->open();
+      }
 
       prompt();
     }

@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -16,11 +17,8 @@ using namespace std;
 int main() {
  clearScr();
 
-  // Initialize Rooms
-  TestL testl;
-
-  // Move player
-  player.moveTo(&testl);
+  // Move player => initiates the game
+  player.moveTo(make_shared<TestL>());
 
   return 0;
 }

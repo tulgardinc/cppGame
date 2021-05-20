@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -18,18 +19,19 @@ public:
   int maxHealth;
   int curHealth;
   int def = 0;
-  vector<Item *> inv;
-  array<Item *, 4> clothes;
-  Room *curRoom;
-  Item *eqp;
+  vector<unique_ptr<Item>> inv;
+  array<unique_ptr<Item>, 4> clothes;
+  shared_ptr<Room>curRoom;
+  unique_ptr<Item> eqp;
 
-  Player(int _health, vector<Item *> _inv, array<Item *, 4> _clothes, Item* _eqp);
+  Player(int _health, vector<unique_ptr<Item>> _inv, array<unique_ptr<Item>, 4> _clothes,
+               unique_ptr<Item> _eqp);
 
-  Item* findItemInv(string name);
+  unique_ptr<Item> findItemInv(string name);
 
-  void removeFromInv(Item* i);
+  void removeFromInv(unique_ptr<Item>& i);
 
-  void moveTo(Room *room);
+  void moveTo(shared_ptr<Room> room);
 
   void takeDamage(int dmg);
 

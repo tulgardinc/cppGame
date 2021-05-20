@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <iterator>
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -13,9 +15,9 @@ using namespace std;
 
 void Obj::setName(string n) { name = n; }
 
-Chest::Chest(vector<Item *> _content, bool _open) {
+Chest::Chest(vector<unique_ptr<Item>> _content, bool _open) {
   setName("chest");
-  content = _content;
+  content = move(_content);
   isOpen = _open;
 }
 
@@ -36,6 +38,6 @@ void Chest::open() {
   }
   cout << "----+---+---+----" << endl;
 
-  vector<Item *> *roomItems = &player.curRoom->items;
-  roomItems->insert(roomItems->end(), content.begin(), content.end());
+   vector<unique_ptr<Item>> &roomItems = player.curRoom->items;
+   roomItems.insert(roomItems.end(), make_move_iterator(content.begin()), make_move_iterator(content.end()));
 }

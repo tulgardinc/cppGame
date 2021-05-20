@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Wall -g
+CFLAGS := -std=gnu++14 -Wall -g 
 TARGET := test
 
 # $(wildcard *.cpp /xxx/xxx/*.cpp): get all .cpp files from the current directory and dir "/xxx/xxx/"
@@ -16,3 +16,7 @@ clean:
 	rm -rf $(TARGET) *.o
 
 .PHONY: all clean
+
+
+
+

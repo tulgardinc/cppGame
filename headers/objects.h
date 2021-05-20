@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -19,10 +20,10 @@ public:
 
 class Chest : public Obj {
 public:
-  vector<Item *> content;
+  vector<unique_ptr<Item>> content;
   bool isOpen;
 
-  Chest(vector<Item *> _content, bool _open);
+  Chest(vector<unique_ptr<Item>> _content, bool _open);
 
   void open();
 };

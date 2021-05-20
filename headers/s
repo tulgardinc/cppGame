@@ -1,0 +1,175 @@
+g++ -std=gnu++14 -Wall -g  -c objects.cpp
+In file included from /usr/include/c++/10.2.0/memory:66,
+                 from objects.cpp:4:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _ForwardIterator = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _ForwardIterator = std::unique_ptr<Item>*; _Tp = std::unique_ptr<Item>]’
+/usr/include/c++/10.2.0/bits/vector.tcc:751:34:   required from ‘void std::vector<_Tp, _Alloc>::_M_range_insert(std::vector<_Tp, _Alloc>::iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::iterator = std::vector<std::unique_ptr<Item> >::iterator]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1665:19:   required from ‘void std::vector<_Tp, _Alloc>::_M_insert_dispatch(std::vector<_Tp, _Alloc>::iterator, _InputIterator, _InputIterator, std::__false_type) [with _InputIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::iterator = std::vector<std::unique_ptr<Item> >::iterator]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1383:22:   required from ‘std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(std::vector<_Tp, _Alloc>::const_iterator, _InputIterator, _InputIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; <template-parameter-2-2> = void; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::iterator = std::vector<std::unique_ptr<Item> >::iterator; std::vector<_Tp, _Alloc>::const_iterator = std::vector<std::unique_ptr<Item> >::const_iterator]’
+objects.cpp:41:67:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+  137 |       static_assert(is_constructible<_ValueType2, decltype(*__first)>::value,
+      |                                                                        ^~~~~
+In file included from /usr/include/c++/10.2.0/array:40,
+                 from objects.cpp:2:
+/usr/include/c++/10.2.0/bits/stl_algobase.h: In instantiation of ‘static _OI std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m(_II, _II, _OI) [with _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_algobase.h:472:30:   required from ‘_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:506:42:   required from ‘_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:514:31:   required from ‘_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _OI = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:569:7:   required from ‘_OI std::copy(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _OI = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >]’
+/usr/include/c++/10.2.0/bits/vector.tcc:744:16:   required from ‘void std::vector<_Tp, _Alloc>::_M_range_insert(std::vector<_Tp, _Alloc>::iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::iterator = std::vector<std::unique_ptr<Item> >::iterator]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1665:19:   required from ‘void std::vector<_Tp, _Alloc>::_M_insert_dispatch(std::vector<_Tp, _Alloc>::iterator, _InputIterator, _InputIterator, std::__false_type) [with _InputIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::iterator = std::vector<std::unique_ptr<Item> >::iterator]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1383:22:   required from ‘std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(std::vector<_Tp, _Alloc>::const_iterator, _InputIterator, _InputIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; <template-parameter-2-2> = void; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::iterator = std::vector<std::unique_ptr<Item> >::iterator; std::vector<_Tp, _Alloc>::const_iterator = std::vector<std::unique_ptr<Item> >::const_iterator]’
+objects.cpp:41:67:   required from here
+/usr/include/c++/10.2.0/bits/stl_algobase.h:380:18: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>& std::unique_ptr<_Tp, _Dp>::operator=(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = Item; _Dp = std::default_delete<Item>]’
+  380 |        *__result = *__first;
+      |        ~~~~~~~~~~^~~~~~~~~~
+In file included from /usr/include/c++/10.2.0/memory:83,
+                 from objects.cpp:4:
+/usr/include/c++/10.2.0/bits/unique_ptr.h:469:19: note: declared here
+  469 |       unique_ptr& operator=(const unique_ptr&) = delete;
+      |                   ^~~~~~~~
+make: *** [makefile:14: objects.o] Error 1
+g++ -std=gnu++14 -Wall -g  -c player.cpp
+In file included from /usr/include/c++/10.2.0/x86_64-pc-linux-gnu/bits/c++allocator.h:33,
+                 from /usr/include/c++/10.2.0/bits/allocator.h:46,
+                 from /usr/include/c++/10.2.0/string:41,
+                 from /usr/include/c++/10.2.0/bits/locale_classes.h:40,
+                 from /usr/include/c++/10.2.0/bits/ios_base.h:41,
+                 from /usr/include/c++/10.2.0/ios:42,
+                 from /usr/include/c++/10.2.0/ostream:38,
+                 from /usr/include/c++/10.2.0/iostream:39,
+                 from player.cpp:3:
+/usr/include/c++/10.2.0/ext/new_allocator.h: In instantiation of ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::unique_ptr<Item>; _Args = {const std::unique_ptr<Item, std::default_delete<Item> >&}; _Tp = std::unique_ptr<Item>]’:
+/usr/include/c++/10.2.0/bits/alloc_traits.h:512:17:   required from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, _Up*, _Args&& ...) [with _Up = std::unique_ptr<Item>; _Args = {const std::unique_ptr<Item, std::default_delete<Item> >&}; _Tp = std::unique_ptr<Item>; std::allocator_traits<std::allocator<_CharT> >::allocator_type = std::allocator<std::unique_ptr<Item> >]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1192:30:   required from ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::value_type = std::unique_ptr<Item>]’
+player.cpp:117:18:   required from here
+/usr/include/c++/10.2.0/ext/new_allocator.h:150:4: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = Item; _Dp = std::default_delete<Item>]’
+  150 |  { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/10.2.0/memory:83,
+                 from player.cpp:4:
+/usr/include/c++/10.2.0/bits/unique_ptr.h:468:7: note: declared here
+  468 |       unique_ptr(const unique_ptr&) = delete;
+      |       ^~~~~~~~~~
+make: *** [makefile:14: player.o] Error 1
+g++ -std=gnu++14 -Wall -g  -c prompt.cpp
+In file included from /usr/include/c++/10.2.0/memory:66,
+                 from prompt.cpp:4:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >; _ForwardIterator = std::unique_ptr<Obj>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >; _ForwardIterator = std::unique_ptr<Obj>*; _Tp = std::unique_ptr<Obj>]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:558:31:   required from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >]’
+prompt.cpp:101:54:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+  137 |       static_assert(is_constructible<_ValueType2, decltype(*__first)>::value,
+      |                                                                        ^~~~~
+make: *** [makefile:14: prompt.o] Error 1
+g++ -std=gnu++14 -Wall -g  -c rooms.cpp
+In file included from /usr/include/c++/10.2.0/memory:66,
+                 from rooms.cpp:4:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = std::unique_ptr<Obj>*; _ForwardIterator = std::unique_ptr<Obj>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = std::unique_ptr<Obj>*; _ForwardIterator = std::unique_ptr<Obj>*; _Tp = std::unique_ptr<Obj>
+’
+/usr/include/c++/10.2.0/bits/vector.tcc:245:35:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >]’
+rooms.cpp:18:13:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+  137 |       static_assert(is_constructible<_ValueType2, decltype(*__first)>::value,
+      |                                                                        ^~~~~
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = std::unique_ptr<Item>*; _ForwardIterator = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = std::unique_ptr<Item>*; _ForwardIterator = std::unique_ptr<Item>*; _Tp = std::unique_ptr<Item>]’
+/usr/include/c++/10.2.0/bits/vector.tcc:245:35:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >]’
+rooms.cpp:19:11:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >; _ForwardIterator = std::unique_ptr<Obj>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >; _ForwardIterator = std::unique_ptr<Obj>*; _Tp = std::unique_ptr<Obj>]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:558:31:   required from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >]’
+rooms.cpp:31:58:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _ForwardIterator = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _ForwardIterator = std::unique_ptr<Item>*; _Tp = std::unique_ptr<Item>]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1514:35:   required from ‘std::vector<_Tp, _Alloc>::pointer std::vector<_Tp, _Alloc>::_M_allocate_and_copy(std::vector<_Tp, _Alloc>::size_type, _ForwardIterator, _ForwardIterator) [with _ForwardIterator = __gnu_cxx::__normal_iterator<const std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::pointer = std::unique_ptr<Item>*; std::vector<_Tp, _Alloc>::size_type = long unsigned int]’
+/usr/include/c++/10.2.0/bits/vector.tcc:226:44:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >]’
+rooms.cpp:19:11:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = const std::unique_ptr<Item>*; _ForwardIterator = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = const std::unique_ptr<Item>*; _ForwardIterator = std::unique_ptr<Item>*; _Tp = std::unique_ptr<Item>]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1585:33:   required from ‘void std::vector<_Tp, _Alloc>::_M_range_initialize(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const std::unique_ptr<Item>*; _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:629:21:   required from ‘std::vector<_Tp, _Alloc>::vector(std::initializer_list<_Tp>, const allocator_type&) [with _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<std::unique_ptr<Item> >]’
+rooms.cpp:28:60:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h: In instantiation of ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = const std::unique_ptr<Obj>*; _ForwardIterator = std::unique_ptr<Obj>*]’:
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:325:37:   required from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>&) [with _InputIterator = const std::unique_ptr<Obj>*; _ForwardIterator = std::unique_ptr<Obj>*; _Tp = std::unique_ptr<Obj>]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:1585:33:   required from ‘void std::vector<_Tp, _Alloc>::_M_range_initialize(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const std::unique_ptr<Obj>*; _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >]’
+/usr/include/c++/10.2.0/bits/stl_vector.h:629:21:   required from ‘std::vector<_Tp, _Alloc>::vector(std::initializer_list<_Tp>, const allocator_type&) [with _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >; std::vector<_Tp, _Alloc>::allocator_type = std::allocator<std::unique_ptr<Obj> >]’
+rooms.cpp:30:47:   required from here
+/usr/include/c++/10.2.0/bits/stl_uninitialized.h:137:72: error: static assertion failed: result type must be constructible from value type of input range
+In file included from /usr/include/c++/10.2.0/algorithm:61,
+                 from rooms.cpp:1:
+/usr/include/c++/10.2.0/bits/stl_algobase.h: In instantiation of ‘static _OI std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m(_II, _II, _OI) [with _II = const std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’:
+/usr/include/c++/10.2.0/bits/stl_algobase.h:472:30:   required from ‘_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = const std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:506:42:   required from ‘_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = const std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:514:31:   required from ‘_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = __gnu_cxx::__normal_iterator<const std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >; _OI = __gnu_cxx::__normal_iterator<std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:569:7:   required from ‘_OI std::copy(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<const std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >; _OI = __gnu_cxx::__normal_iterator<std::unique_ptr<Obj>*, std::vector<std::unique_ptr<Obj> > >]’
+/usr/include/c++/10.2.0/bits/vector.tcc:238:31:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >]’
+rooms.cpp:18:13:   required from here
+/usr/include/c++/10.2.0/bits/stl_algobase.h:380:18: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>& std::unique_ptr<_Tp, _Dp>::operator=(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = Obj; _Dp = std::default_delete<Obj>]’
+  380 |        *__result = *__first;
+      |        ~~~~~~~~~~^~~~~~~~~~
+In file included from /usr/include/c++/10.2.0/memory:83,
+                 from rooms.cpp:4:
+/usr/include/c++/10.2.0/bits/unique_ptr.h:469:19: note: declared here
+  469 |       unique_ptr& operator=(const unique_ptr&) = delete;
+      |                   ^~~~~~~~
+In file included from /usr/include/c++/10.2.0/algorithm:61,
+                 from rooms.cpp:1:
+/usr/include/c++/10.2.0/bits/stl_algobase.h: In instantiation of ‘static _OI std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m(_II, _II, _OI) [with _II = std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’:
+/usr/include/c++/10.2.0/bits/stl_algobase.h:472:30:   required from ‘_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:506:42:   required from ‘_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:514:31:   required from ‘_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:569:7:   required from ‘_OI std::copy(_II, _II, _OI) [with _II = std::unique_ptr<Obj>*; _OI = std::unique_ptr<Obj>*]’
+/usr/include/c++/10.2.0/bits/vector.tcc:243:17:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Obj>; _Alloc = std::allocator<std::unique_ptr<Obj> >]’
+rooms.cpp:18:13:   required from here
+/usr/include/c++/10.2.0/bits/stl_algobase.h:380:18: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>& std::unique_ptr<_Tp, _Dp>::operator=(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = Obj; _Dp = std::default_delete<Obj>]’
+  380 |        *__result = *__first;
+      |        ~~~~~~~~~~^~~~~~~~~~
+In file included from /usr/include/c++/10.2.0/memory:83,
+                 from rooms.cpp:4:
+/usr/include/c++/10.2.0/bits/unique_ptr.h:469:19: note: declared here
+  469 |       unique_ptr& operator=(const unique_ptr&) = delete;
+      |                   ^~~~~~~~
+In file included from /usr/include/c++/10.2.0/algorithm:61,
+                 from rooms.cpp:1:
+/usr/include/c++/10.2.0/bits/stl_algobase.h: In instantiation of ‘static _OI std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m(_II, _II, _OI) [with _II = const std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_algobase.h:472:30:   required from ‘_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = const std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:506:42:   required from ‘_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = const std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:514:31:   required from ‘_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = __gnu_cxx::__normal_iterator<const std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _OI = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:569:7:   required from ‘_OI std::copy(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<const std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >; _OI = __gnu_cxx::__normal_iterator<std::unique_ptr<Item>*, std::vector<std::unique_ptr<Item> > >]’
+/usr/include/c++/10.2.0/bits/vector.tcc:238:31:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >]’
+rooms.cpp:19:11:   required from here
+/usr/include/c++/10.2.0/bits/stl_algobase.h:380:18: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>& std::unique_ptr<_Tp, _Dp>::operator=(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = Item; _Dp = std::default_delete<Item>]’
+  380 |        *__result = *__first;
+      |        ~~~~~~~~~~^~~~~~~~~~
+In file included from /usr/include/c++/10.2.0/memory:83,
+                 from rooms.cpp:4:
+/usr/include/c++/10.2.0/bits/unique_ptr.h:469:19: note: declared here
+  469 |       unique_ptr& operator=(const unique_ptr&) = delete;
+      |                   ^~~~~~~~
+In file included from /usr/include/c++/10.2.0/algorithm:61,
+                 from rooms.cpp:1:
+/usr/include/c++/10.2.0/bits/stl_algobase.h: In instantiation of ‘static _OI std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m(_II, _II, _OI) [with _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’:
+/usr/include/c++/10.2.0/bits/stl_algobase.h:472:30:   required from ‘_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:506:42:   required from ‘_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:514:31:   required from ‘_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/stl_algobase.h:569:7:   required from ‘_OI std::copy(_II, _II, _OI) [with _II = std::unique_ptr<Item>*; _OI = std::unique_ptr<Item>*]’
+/usr/include/c++/10.2.0/bits/vector.tcc:243:17:   required from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::unique_ptr<Item>; _Alloc = std::allocator<std::unique_ptr<Item> >]’
+rooms.cpp:19:11:   required from here
+/usr/include/c++/10.2.0/bits/stl_algobase.h:380:18: error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>& std::unique_ptr<_Tp, _Dp>::operator=(const std::unique_ptr<_Tp, _Dp>&) [with _Tp = Item; _Dp = std::default_delete<Item>]’
+  380 |        *__result = *__first;
+      |        ~~~~~~~~~~^~~~~~~~~~
+In file included from /usr/include/c++/10.2.0/memory:83,
+                 from rooms.cpp:4:
+/usr/include/c++/10.2.0/bits/unique_ptr.h:469:19: note: declared here
+  469 |       unique_ptr& operator=(const unique_ptr&) = delete;
+      |                   ^~~~~~~~
+make: *** [makefile:14: rooms.o] Error 1
+make: Target 'all' not remade because of errors.

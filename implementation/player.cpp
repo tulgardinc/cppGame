@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -12,36 +13,38 @@ using namespace std;
 #include "../headers/player.h"
 #include "../headers/rooms.h"
 
-Player::Player(int _health, vector<Item *> _inv, array<Item *, 4> _clothes,
-               Item *_eqp)
-    : maxHealth(_health), curHealth(_health), inv(_inv), clothes(_clothes),
-      eqp(_eqp) {
+Player::Player(int _health, vector<unique_ptr<Item>> _inv,
+               array<unique_ptr<Item>, 4> _clothes, unique_ptr<Item> _eqp)
+    : maxHealth(_health), curHealth(_health) {
+  clothes = move(_clothes);
+  inv = move(_inv);
+  eqp = move(_eqp);
   calcDef();
 };
 
-Item *Player::findItemInv(string name) {
-  for (auto item : inv) {
-    if (_toLower(item->name) == name) {
-      return item;
+unique_ptr<Item> Player::findItemInv(string name) {
+  for (auto & i : inv) {
+    if (_toLower(i->name) == name) {
+      return move(i);
     }
   }
-  return nullptr;
+  return 0;
 }
 
 void Player::calcDef() {
   def = 0;
-  for (auto c : clothes) {
+  for (auto &c : clothes) {
     if (c != nullptr) {
       def += c->prop;
     }
   }
 }
 
-void Player::removeFromInv(Item *i) {
+void Player::removeFromInv(unique_ptr<Item> &i) {
   inv.erase(find(inv.begin(), inv.end(), i));
 }
 
-void Player::moveTo(Room *room) {
+void Player::moveTo(shared_ptr<Room> room) { 
   curRoom = room;
   room->init();
 }
@@ -52,7 +55,7 @@ void Player::takeDamage(int dmg) {
 }
 
 void Player::use(string name) {
-  Item *i = findItemInv(name);
+  unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
@@ -91,17 +94,17 @@ void Player::use(string name) {
 void Player::takeItem(string name) {
   // add item to inventory
 
-  vector<Item *> &rItems = curRoom->items;
-  Item *i;
+  vector<unique_ptr<Item>> &rItems = curRoom->items;
+  unique_ptr<Item> i;
 
   if (rItems.size() == 0) {
     cout << "Item not present in the room." << endl;
     prompt();
   }
 
-  for (auto item : rItems) {
+  for (auto &item : rItems) {
     if (_toLower(item->name) == name) {
-      i = item;
+      i = move(item);
       break;
     }
   }
@@ -111,16 +114,17 @@ void Player::takeItem(string name) {
     prompt();
   }
 
-  inv.push_back(i);
-  rItems.erase(find(rItems.begin(), rItems.end(), i));
-
   cout << "You took \"" << i->name << "\"." << endl;
+
+  inv.push_back(move(i));
+  rItems.erase(find(rItems.begin(), rItems.end(), i));
 }
 
 void Player::equipItem(string name) {
   // Check if the item that is being equiped is within the inventory
 
-  Item *i = findItemInv(name);
+  unique_ptr<Item> i = findItemInv(name);
+
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
@@ -131,58 +135,64 @@ void Player::equipItem(string name) {
     removeFromInv(i);
 
     if (eqp != nullptr) {
-      inv.push_back(eqp);
+      inv.push_back(move(eqp));
     }
 
-    eqp = i;
-  } else if (i->type <= 6 && i->type >= 2) {
+    cout << "You equipped \"" << i->name << "\"." << endl;
 
+    eqp = move(i);
+
+  } else if (i->type <= 6 && i->type >= 2) {
+    // chlothing
+    
     removeFromInv(i);
 
     if (clothes[i->type - 3] != nullptr) {
-      inv.push_back(clothes[i->type - 3]);
+      inv.push_back(move(clothes[i->type - 3]));
     }
 
-    clothes[i->type - 3] = i;
+    cout << "You equipped \"" << i->name << "\"." << endl;
+
+    clothes[i->type - 3] = move(i);
 
     calcDef();
   }
 
   else {
     cout << "This item can not be equipped." << endl;
-    prompt();
   }
 
-  // if it is in the inventory:
-  // remove it from the inventory
-
-  cout << "You equipped \"" << i->name << "\"." << endl;
 }
 
 void Player::check() {
+  cout << "|--------Status---------|" << endl;
+  cout << "   -  Health: "
+       << "\t" << curHealth << "/" << maxHealth << " HP" << endl;
+  cout << "   -  Defense: "
+       << "\t" << def << " DP" << endl;
   cout << "|-------Inventory-------|" << endl;
-  for (auto item : inv) {
+  for (auto &item : inv) {
     cout << "   -  " << item->name << endl;
   }
   cout << "|--------Clothes--------|" << endl;
-  for (auto item : clothes) {
+  for (auto &item : clothes) {
     if (item == nullptr) {
       cout << "   -  Empty" << endl;
     } else {
       cout << "   -  " << item->name << endl;
     }
   }
-  cout << "|-----------------------|" << endl;
+  cout << "|-------Equipped--------|" << endl;
   if (eqp == nullptr) {
-    cout << "   -  Nothing Equipped" << endl;
+    cout << "   -  Empty" << endl;
   } else {
-    cout << "   -  " << eqp->name << " Equipped" << endl;
+    cout << "   -  " << eqp->name << endl;
   }
   cout << "|-----------------------|" << endl;
 }
 
 void Player::inspect(string name) {
-  Item *i = findItemInv(name);
+  unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
@@ -195,7 +205,7 @@ void Player::inspect(string name) {
 }
 
 void Player::discard(string name) {
-  Item *i = findItemInv(name);
+  unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
@@ -205,7 +215,9 @@ void Player::discard(string name) {
   if (i->type != 0) {
     removeFromInv(i);
 
-    cout << "Discarded " << name << "." << endl;
+    cout << "Discarded \"" << i->name << "\"." << endl;
+
+    i.reset();
   } else {
     cout << "This item seems important." << endl;
   }
@@ -213,26 +225,25 @@ void Player::discard(string name) {
 
 void Player::unequip(string name) {
 
-  Item **c = nullptr;
+  unique_ptr<Item> c = nullptr;
 
   for (auto &_c : clothes) {
     if (_c != nullptr && _toLower(_c->name) == name) {
-      c = &_c;
+      c = move(_c);
     }
   }
 
   if (c != nullptr) {
-    inv.push_back(*c);
-    cout << "You took off " << (*c)->name << "." << endl;
-    *c = nullptr;
+    cout << "You took off " << c->name << "." << endl;
+    inv.push_back(move(c));
+    calcDef();
   } else if (eqp != nullptr && _toLower(eqp->name) == name) {
-    cout << "Chungus" << endl;
-    inv.push_back(eqp);
+    cout << eqp->name << endl;
     cout << "You put " << eqp->name << " back into your bag." << endl;
-    eqp = nullptr;
+    inv.push_back(move(eqp));
   } else {
     cout << "No item to remove." << endl;
   }
 }
 
-Player player(50, {}, {}, new Item(0));
+Player player(50, {}, {}, make_unique<Item>(0));
