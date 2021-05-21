@@ -1,3 +1,15 @@
 #+title:  CPP Text Adventure
 
 An adventure game I am creating using c++ in order to learn the langauge.
+
+- [X] Look command to see around the room
+- [ ] Items should have sepate classes with one base class
+- [ ] Room navigation and structure using matricies and "move" command
+- [ ] Use <Item> on <Object> command for puzzle solving
+- [ ] Enemies
+- [ ] Attacking with weapons
+- [ ] Handling multiples of same Enemy and Object (Some id system)
+- [ ] NPC interactions ....
+- [ ] Quests list and command
+
+
