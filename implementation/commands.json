@@ -1,0 +1,86 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "item.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/item.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "main.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/main.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "objects.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/objects.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "player.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/player.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "prompt.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/prompt.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "rooms.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/rooms.cpp"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=gnu++14",
+      "-Wall",
+      "-g",
+      "-c",
+      "utilities.cpp"
+    ],
+    "directory": "/home/ts/projects/cpptest/implementation",
+    "file": "/home/ts/projects/cpptest/implementation/utilities.cpp"
+  }
+]

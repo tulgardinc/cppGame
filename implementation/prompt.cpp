@@ -12,11 +12,10 @@
 
 using namespace std;
 
-unique_ptr<Obj> findObj(string name) {
-  cout << player.curRoom->objects.size() << endl;
+shared_ptr<Obj> findObj(string name) {
   for (auto & obj : player.curRoom->objects) {
     if (obj->name == name) {
-      return move(obj);
+      return obj;
     }
   }
   cout << "No chest in the room to open." << endl;
@@ -25,11 +24,6 @@ unique_ptr<Obj> findObj(string name) {
 }
 
 void prompt() {
-
-  for (auto & i : player.curRoom->items) {
-    cout << i->name << endl;
-  }
-
   string ans;
   cout << endl;
   cout << "-----------------" << endl;
@@ -83,7 +77,8 @@ void prompt() {
     }
 
   } else if (cmd == "look") {
-
+    player.curRoom->look();
+    prompt();
   } else if (cmd == "use") {
 
     if (param != "") {
@@ -100,7 +95,7 @@ void prompt() {
 
   } else if (cmd == "open") {
     if (param == "chest") {
-      unique_ptr<Obj> o = findObj("chest");
+      shared_ptr<Obj> o = findObj("chest");
 
       {
 	Obj* base = o.get();

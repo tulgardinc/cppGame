@@ -40,4 +40,5 @@ void Chest::open() {
 
    vector<unique_ptr<Item>> &roomItems = player.curRoom->items;
    roomItems.insert(roomItems.end(), make_move_iterator(content.begin()), make_move_iterator(content.end()));
+   isOpen = true;
 }

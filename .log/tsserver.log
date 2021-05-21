@@ -1,0 +1,39 @@
+Info 0    [09:31:22.191] Starting TS Server
+Info 1    [09:31:22.192] Version: 4.2.4
+Info 2    [09:31:22.192] Arguments: /usr/bin/node /home/ts/.emacs.d/.cache/lsp/npm/typescript/bin/tsserver --logFile /home/ts/projects/cpptest/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/844f02bfb033fecdfcda4b888cca04bd/tscancellation*
+Info 3    [09:31:22.192] Platform: linux NodeVersion: 16 CaseSensitive: true
+Info 4    [09:31:22.192] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [09:31:22.229] Search path: /home/ts/projects/cpptest/implementation
+Info 6    [09:31:22.231] For info: /home/ts/projects/cpptest/implementation/commands.json :: No config files found.
+Info 7    [09:31:22.242] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 8    [09:31:23.359] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 1116.7113089999184ms
+Info 9    [09:31:23.359] Project '/dev/null/inferredProject1*' (Inferred)
+Info 10   [09:31:23.360] 	Files (19)
+
+Info 11   [09:31:23.360] -----------------------------------------------
+Info 12   [09:33:00.424] Search path: /home/ts/projects/cpptest/implementation
+Info 13   [09:33:00.424] For info: /home/ts/projects/cpptest/implementation/compile_commands.json :: No config files found.
+Info 14   [09:33:00.425] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 15   [09:33:00.443] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 2 structureChanged: true Elapsed: 18.610260999994352ms
+Info 16   [09:33:00.443] Project '/dev/null/inferredProject1*' (Inferred)
+Info 17   [09:33:00.443] 	Files (19)
+
+Info 18   [09:33:00.443] -----------------------------------------------
+Info 19   [09:37:54.828] FileWatcher:: Triggered with /home/ts/projects/cpptest/implementation/compile_commands.json 2:: WatchInfo: /home/ts/projects/cpptest/implementation/compile_commands.json 500 undefined Project:  WatchType: Closed Script info
+Info 20   [09:37:54.828] Elapsed:: 0.27864699997007847ms FileWatcher:: Triggered with /home/ts/projects/cpptest/implementation/compile_commands.json 2:: WatchInfo: /home/ts/projects/cpptest/implementation/compile_commands.json 500 undefined Project:  WatchType: Closed Script info
+Info 21   [09:44:26.170] Search path: /home/ts/projects/cpptest/implementation
+Info 22   [09:44:26.170] For info: /home/ts/projects/cpptest/implementation/commands.json :: No config files found.
+Info 23   [09:44:26.171] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 24   [09:44:26.177] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 3 structureChanged: true Elapsed: 6.334379999898374ms
+Info 25   [09:44:26.177] Project '/dev/null/inferredProject1*' (Inferred)
+Info 26   [09:44:26.177] 	Files (19)
+
+Info 27   [09:44:26.177] -----------------------------------------------
+Info 28   [09:45:19.538] Search path: /home/ts/projects/cpptest/implementation
+Info 29   [09:45:19.538] For info: /home/ts/projects/cpptest/implementation/commands.json :: No config files found.
+Info 30   [09:45:19.538] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 31   [09:45:19.539] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 4 structureChanged: false Elapsed: 0.41325899958610535ms
+Info 32   [09:45:19.539] Project '/dev/null/inferredProject1*' (Inferred)
+Info 33   [09:45:19.539] 	Files (19)
+
+Info 34   [09:45:19.539] -----------------------------------------------
