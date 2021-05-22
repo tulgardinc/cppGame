@@ -19,6 +19,7 @@ public:
   int maxHealth;
   int curHealth;
   int def = 0;
+  int x, y = 0;
   vector<unique_ptr<Item>> inv;
   array<unique_ptr<Item>, 4> clothes;
   shared_ptr<Room>curRoom;
@@ -31,11 +32,15 @@ public:
 
   void removeFromInv(unique_ptr<Item>& i);
 
-  void moveTo(shared_ptr<Room> room);
+  void moveTo( int _y, int _x);
+
+  void moveDir(string dir);
 
   void takeDamage(int dmg);
 
   void use(string name);
+
+  void useOn(string param1, string param2);
 
   void takeItem(string name);
 

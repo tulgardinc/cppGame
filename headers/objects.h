@@ -15,7 +15,10 @@ using namespace std;
 class Obj {
 public:
   string name;
-  void setName(string n);
+  bool canBeUsed = false;
+  bool isUsed = false;
+  virtual void use(unique_ptr<Item> item) = 0;
+  virtual void inspect() = 0;
 };
 
 class Chest : public Obj {
@@ -26,4 +29,13 @@ public:
   Chest(vector<unique_ptr<Item>> _content, bool _open);
 
   void open();
+  void use(unique_ptr<Item>) {};
+  void inspect();
+};
+
+class TrapDoor : public Obj {
+public:
+  TrapDoor(bool _isUsed);
+  void use(unique_ptr<Item>);
+  void inspect();
 };

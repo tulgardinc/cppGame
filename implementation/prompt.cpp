@@ -13,7 +13,7 @@
 using namespace std;
 
 shared_ptr<Obj> findObj(string name) {
-  for (auto & obj : player.curRoom->objects) {
+  for (auto &obj : player.curRoom->objects) {
     if (obj->name == name) {
       return obj;
     }
@@ -77,14 +77,30 @@ void prompt() {
     }
 
   } else if (cmd == "look") {
+    clearScr();
+    cout << "You look around." << endl;
+    cout << endl;
     player.curRoom->look();
     prompt();
+  } else if (cmd == "move") {
+    if (param != "") {
+      player.moveDir(param);
+      prompt();
+    }
   } else if (cmd == "use") {
 
-    if (param != "") {
+    if (ans.find(" on ")) {
+
+      auto cmd1 = ans.find("use");
+      auto cmd2 = ans.find("on");
+      string param1 = ans.substr(cmd1 + 4, cmd2 - 5);
+      string param2 = ans.substr(cmd2 + 3, ans.size());
+      player.useOn(param1, param2);
+      prompt();
+
+    } else if (param != "") {
 
       player.use(param);
-
       prompt();
 
     } else {
@@ -92,15 +108,14 @@ void prompt() {
       cout << "Usage: use <item>" << endl;
       prompt();
     }
-
   } else if (cmd == "open") {
     if (param == "chest") {
       shared_ptr<Obj> o = findObj("chest");
 
       {
-	Obj* base = o.get();
-	Chest *_c = static_cast<Chest *>(base);
-	_c->open();
+        Obj *base = o.get();
+        Chest *_c = static_cast<Chest *>(base);
+        _c->open();
       }
 
       prompt();
@@ -116,7 +131,6 @@ void prompt() {
       cout << "usage: take <item>" << endl;
       prompt();
     }
-
   } else if (cmd == "equip") {
     if (param != "") {
 
