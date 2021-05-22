@@ -296,25 +296,49 @@ void Player::unequip(string name) {
 
 void Player::moveDir(string dir) {
   if (dir == "north" && getRoomFromMap(x, y + 1) != nullptr) {
-    clearScr();
-    cout << "You move " << dir << "." << endl;
-    cout << endl;
-    moveTo(x, y + 1);
+    if (curRoom->blocks[0] == nullptr || curRoom->blocks[0]->isUsed) {
+      clearScr();
+      cout << "You move " << dir << "." << endl;
+      cout << endl;
+      moveTo(x, y + 1);
+    } else {
+      cout << "You can't move " << dir << "." << endl;
+      cout << "Your path is blocked by a " << curRoom->blocks[0]->name << "."
+           << endl;
+    }
   } else if (dir == "east" && getRoomFromMap(x + 1, y) != nullptr) {
-    clearScr();
-    cout << "You move " << dir << "." << endl;
-    cout << endl;
-    moveTo(x + 1, y);
+    if (curRoom->blocks[1] == nullptr || curRoom->blocks[0]->isUsed) {
+      clearScr();
+      cout << "You move " << dir << "." << endl;
+      cout << endl;
+      moveTo(x + 1, y);
+    } else {
+      cout << "You can't move " << dir << "." << endl;
+      cout << "Your path is blocked by a " << curRoom->blocks[0]->name << "."
+           << endl;
+    }
   } else if (dir == "south" && getRoomFromMap(x, y - 1) != nullptr) {
-    clearScr();
-    cout << "You move " << dir << "." << endl;
-    cout << endl;
-    moveTo(x, y - 1);
+    if (curRoom->blocks[2] == nullptr || curRoom->blocks[0]->isUsed) {
+      clearScr();
+      cout << "You move " << dir << "." << endl;
+      cout << endl;
+      moveTo(x, y - 1);
+    } else {
+      cout << "You can't move " << dir << "." << endl;
+      cout << "Your path is blocked by a " << curRoom->blocks[0]->name << "."
+           << endl;
+    }
   } else if (dir == "west" && getRoomFromMap(x - 1, y) != nullptr) {
-    clearScr();
-    cout << "You move " << dir << "." << endl;
-    cout << endl;
-    moveTo(x - 1, y);
+    if (curRoom->blocks[3] == nullptr || curRoom->blocks[0]->isUsed) {
+      clearScr();
+      cout << "You move " << dir << "." << endl;
+      cout << endl;
+      moveTo(x - 1, y);
+    } else {
+      cout << "You can't move " << dir << "." << endl;
+      cout << "Your path is blocked by a " << curRoom->blocks[0]->name << "."
+           << endl;
+    }
   } else {
     cout << "Can't move in that direction" << endl;
   }

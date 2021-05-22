@@ -18,6 +18,7 @@ public:
   string name;
   vector<shared_ptr<Obj>> objects;
   vector<unique_ptr<Item>> items;
+  array<shared_ptr<Obj>, 4> blocks{0}; // n e s w
   bool visited = false;
   virtual void init() = 0;
   virtual void look() = 0;
@@ -37,6 +38,13 @@ extern shared_ptr<Room> & getRoomFromMap(int _x, int _y);
 class TestL : public Room {
 public:
   TestL();
+  void init();
+  void look();
+};
+
+class HiddenL : public Room {
+public:
+  HiddenL();
   void init();
   void look();
 };

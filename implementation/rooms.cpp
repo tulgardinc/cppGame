@@ -97,8 +97,10 @@ void TestL::look() {
 // ===== TestuL ===== //
 
 TestuL::TestuL() {
-  setValues("Testup", vector<shared_ptr<Obj>>{make_shared<TrapDoor>(false)},
+  shared_ptr<Obj> trapDoor = make_shared<TrapDoor>(false);
+  setValues("Testup", vector<shared_ptr<Obj>>{trapDoor},
             vector<unique_ptr<Item>>{});
+  blocks[0] = trapDoor;
 }
 
 void TestuL::init() {
@@ -114,6 +116,35 @@ void TestuL::init() {
 void TestuL::look() {
   cout << "Buuugin room with a trapdoor." << endl;
   if (findObject("trapdoor")->isUsed) {
+    cout << "It has been opened.";
+  }
+}
+
+// ===== HiddenL ===== //
+
+HiddenL::HiddenL() {
+  vector<unique_ptr<Item>> _content;
+  shared_ptr<Obj> chest = make_shared<Chest>(move(_content), false);
+  setValues("Testup", vector<shared_ptr<Obj>>{chest},
+            vector<unique_ptr<Item>>{});
+}
+
+void HiddenL::init() {
+  clearScr();
+  cout << "You pass trough the trapdoor into a dark room with stains on the "
+          "walls."
+       << endl;
+  cout << "You can see a chest at the very end of the room." << endl;
+}
+
+void HiddenL::look() {
+  cout << "Spooky room with a chest inside." << endl;
+  shared_ptr<Chest> c;
+  {
+    shared_ptr<Obj> _o = findObject("chest");
+    c = static_pointer_cast<Chest>(_o);
+  }
+  if (c->isOpen) {
     cout << "It has been opened.";
   }
 }

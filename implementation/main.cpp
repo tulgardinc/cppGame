@@ -14,7 +14,7 @@ using namespace std;
 #include "../headers/player.h"
 
 array<array<shared_ptr<Room>, 5>, 5> gameMap{{
-      {nullptr, nullptr, nullptr, nullptr, nullptr},
+      {nullptr, nullptr, make_shared<HiddenL>(), nullptr, nullptr},
       {nullptr, nullptr, make_shared<TestuL>(), nullptr, nullptr},
       {nullptr, make_shared<TestlL>(), make_shared<TestL>(), make_shared<TestrL>(), nullptr},
       {nullptr, nullptr, make_shared<TestdL>(), nullptr, nullptr},
