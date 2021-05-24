@@ -11,6 +11,13 @@
 using namespace std;
 
 void Entity::death() {
+  if (loot.size() != 0) {
+    cout << "the " << name << " drops:" << endl;
+    for (auto & i : loot) {
+      cout << i->name << endl;
+      curRoom->items.push_back(move(i));
+    }
+  }
   vector<shared_ptr<Entity>>& _vec = curRoom->entities;
   auto _tmp = find_if(_vec.begin(), _vec.end(), [&] (shared_ptr<Entity> e) {
     return e.get() == this;

@@ -19,11 +19,11 @@ shared_ptr<Obj> findObj(string name) {
     }
   }
   cout << "No chest in the room to open." << endl;
-  prompt();
   return nullptr;
 }
 
-void prompt() {
+int prompt() {
+  int retVal = 1;
   string ans;
   cout << endl;
   cout << "-----------------" << endl;
@@ -38,7 +38,7 @@ void prompt() {
     cout << "Invalid command, please type \"actions\" in order to view a list "
             "of possible actions."
          << endl;
-    prompt();
+    return 0;
   }
 
   string cmd = ans.substr(0, ans.find(' '));
@@ -60,22 +60,22 @@ void prompt() {
     cout << "quit - Leaves the game." << endl;
     cout << "discard <item> - Discard an item from your inventory (forever)."
          << endl;
-    prompt();
+    return 0;
   } else if (cmd == "check") {
     clearScr();
     player->check();
-    prompt();
+    return 0;
 
   } else if (cmd == "inspect") {
     if (param != "") {
 
-      player->inspect(param);
-      prompt();
+      retVal = player->inspect(param);
+      return 0;
 
     } else {
       cout << "What will you inspect?" << endl;
       cout << "Usage: inspect <item>" << endl;
-      prompt();
+      return 0;
     }
 
   } else if (cmd == "look") {
@@ -84,14 +84,17 @@ void prompt() {
     cout << endl;
     player->curRoom->look();
     player->curRoom->listEnemies();
-    prompt();
+    return 0;
   } else if (cmd == "move") {
     if (param != "") {
-      player->moveDir(param);
+      retVal = player->moveDir(param);
+    } else {
+      cout << "Move where?" << endl;
+      cout << "Usage: move <direction>" << endl;
     }
   } else if (cmd == "use") {
 
-    if (ans.find(" on ")) {
+    if (ans.find(" on ") != string::npos) {
 
       auto cmd1 = ans.find("use");
       auto cmd2 = ans.find("on");
@@ -100,13 +103,12 @@ void prompt() {
       player->useOn(param1, param2);
 
     } else if (param != "") {
-
-      player->use(param);
+      retVal = player->use(param);
 
     } else {
       cout << "What will you use?" << endl;
       cout << "Usage: use <item>" << endl;
-      prompt();
+      return 0;
     }
   } else if (cmd == "open") {
     if (param == "chest") {
@@ -117,48 +119,47 @@ void prompt() {
         Chest *_c = static_cast<Chest *>(base);
         _c->open();
       }
-
     }
   } else if (cmd == "take") {
     if (param != "") {
 
-      player->takeItem(param);
+      retVal = player->takeItem(param);
 
     } else {
       cout << "What will you take?" << endl;
       cout << "usage: take <item>" << endl;
-      prompt();
+      return 0;
     }
   } else if (cmd == "equip") {
     if (param != "") {
 
-      player->equipItem(param);
-      prompt();
+      retVal = player->equipItem(param);
+      return 0;
 
     } else {
 
       cout << "What will you equip?" << endl;
       cout << "usage: equip <item>" << endl;
-      prompt();
+      return 0;
     }
   } else if (cmd == "discard") {
     if (param != "") {
-      player->discard(param);
-      prompt();
+      retVal = player->discard(param);
+      return 0;
     } else {
       cout << "What will you discard?" << endl;
       cout << "Usage: discard <item>" << endl;
-      prompt();
+      return 0;
     }
   } else if (cmd == "unequip") {
     if (param != "") {
       player->unequip(param);
-      prompt();
+      return 0;
     }
     {
       cout << "What will you unequip?" << endl;
       cout << "Usage: unequip <item>" << endl;
-      prompt();
+      return 0;
     }
   } else if (cmd == "attack") {
     if (param != "") {
@@ -166,19 +167,19 @@ void prompt() {
     } else {
       cout << "Attack what?" << endl;
       cout << "Usage: attack <entitiy>" << endl;
-      prompt();
+      return 0;
     }
   } else if (cmd == "wait") {
     cout << "You choose to wait" << endl;
-    return;
+    return 0;
   } else if (cmd == "quit") {
     cout << "Bye :(" << endl;
     game = false;
-  }
-  else {
+  } else {
     cout << "Invalid command, please type \"actions\" in order to view a list "
             "of possible actions."
          << endl;
-    prompt();
+    return 0;
   }
+  return retVal;
 }

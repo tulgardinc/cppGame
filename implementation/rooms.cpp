@@ -142,9 +142,11 @@ HiddenL::HiddenL() {
 void HiddenL::init() {
 
   vector<unique_ptr<Item>> _content;
+  vector<unique_ptr<Item>> loot;
+  loot.push_back(make_unique<HealthPotion>());
   shared_ptr<Obj> chest = make_shared<Chest>(move(_content), false);
   setValues("Testup", vector<shared_ptr<Obj>>{chest},
-            vector<unique_ptr<Item>>{}, {make_shared<Goblin>(5, vector<unique_ptr<Item>>{}, make_unique<BrokenSword>(), x, y)});
+            vector<unique_ptr<Item>>{}, {make_shared<Goblin>(15, move(loot), make_unique<BrokenSword>(), x, y)});
 
 
   clearScr();

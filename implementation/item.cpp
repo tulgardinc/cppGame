@@ -34,15 +34,15 @@ HealthPotion::HealthPotion() {
   desc = "A potion used to rapidly heal wounds. It is not the strongest but "
          "it will do.";
   dia = "You applied the health potion to your wounds. It sooths your pane.";
-  prop = 5;
+  prop = 10;
 }
 
 BrokenHelmet::BrokenHelmet() {
-  name = "Helmet";
+  name = "Broken Helmet";
   type = 3;
   desc = "Old style knight helmet. Its rusted, the face guard is split in "
          "half, and the inside is covered in old, dried blood ";
-  prop = 25;
+  prop = 200;
 }
 
 Crowbar::Crowbar() {

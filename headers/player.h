@@ -33,31 +33,31 @@ public:
 
   void moveTo( int _y, int _x);
 
-  void moveDir(string dir);
+  int moveDir(string dir);
 
   void takeDamage(int dmg);
 
-  void use(string name);
+  int use(string name);
 
   void useOn(string param1, string param2);
 
-  void takeItem(string name);
+  int takeItem(string name);
 
-  void equipItem(string name);
+  int equipItem(string name);
 
   void check();
 
-  void inspect(string name);
+  int inspect(string name);
 
   void calcDef();
 
   void unequip(string name);
 
-  void discard(string name);
+  int discard(string name);
 
   void attack(string name);
 
-  void action();
+  int action();
 };
 
 extern shared_ptr<Player> player;

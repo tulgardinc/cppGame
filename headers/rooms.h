@@ -24,11 +24,15 @@ public:
   vector<shared_ptr<Entity>> entities{};
   bool visited = false;
   int x, y;
+
   virtual void init() = 0;
   virtual void look() = 0;
+  virtual void directions() = 0;
+
   shared_ptr<Obj> findObject(string name);
   shared_ptr<Entity> findEntity(string name);
   void printItems();
+  void printDirections();
   void listEnemies();
   void addToRoomVec(shared_ptr<Room> room);
   void setValues(string _n, vector<shared_ptr<Obj>> _o,
@@ -44,6 +48,7 @@ public:
   TestL();
   void init();
   void look();
+  void directions() {};
 };
 
 class HiddenL : public Room {
@@ -51,6 +56,7 @@ public:
   HiddenL();
   void init();
   void look();
+  void directions() {};
 };
 
 class TestrL : public Room {
@@ -58,6 +64,7 @@ public:
   TestrL() {name = "right";};
   void init() {};
   void look() {};
+  void directions() {};
 };
 
 class TestlL : public Room {
@@ -65,6 +72,7 @@ public:
   TestlL() {name = "left";};
   void init() {};
   void look() {};
+  void directions() {};
 };
 
 class TestuL : public Room {
@@ -72,6 +80,7 @@ public:
   TestuL();
   void init();
   void look();
+  void directions() {};
 };
 
 class TestdL : public Room {
@@ -79,4 +88,5 @@ public:
   TestdL() {name = "down";};
   void init() {};
   void look() {};
+  void directions() {};
 };

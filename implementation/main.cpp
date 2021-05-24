@@ -52,8 +52,13 @@ int main() {
 
   // Start the game
   while (game) {
-    for (auto &entity : player->curRoom->entities) {
-      entity->action();
+    unsigned int iter = 0;
+    // enables to repeat turns
+    while (iter < player->curRoom->entities.size()) {
+      int val = player->curRoom->entities[iter]->action();
+      if (val == 1) {
+        iter += 1;
+      }
     }
   }
 

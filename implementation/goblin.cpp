@@ -15,10 +15,11 @@ using namespace std;
 #include "../headers/goblin.h"
 
 Goblin::Goblin(int _health, vector<unique_ptr<Item>> _loot, unique_ptr<Item> _eqp, int _x, int _y)
-  :  loot(move(_loot)), eqp(move(_eqp)) {
+  :  eqp(move(_eqp)) {
   x = _x;
   y = _y;
   maxHealth = curHealth = _health;
+  loot = move(_loot);
   curRoom = gameMap[y][x];
   name = "goblin";
   isEnemy = true;
@@ -36,11 +37,12 @@ void Goblin::takeDamage(int dmg) {
   curHealth -= dmg;
 }
 
-void Goblin::action() {
+int Goblin::action() {
   if (curHealth <= 0) {
     cout << "The head of the goblin rolls on the floor." << endl;
     death();
-    return;
+    return 1;
   }
   attack();
+  return 1;
 }

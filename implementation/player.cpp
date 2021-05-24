@@ -64,16 +64,21 @@ void Player::moveTo(int _x, int _y) {
 
 void Player::takeDamage(int dmg) {
   // hurt the player
-  cout << "You take a hit! -" << dmg << "HP!" << endl;
-  curHealth -= dmg;
+  // max 500 def
+  float _dmg = (float)dmg;
+  float _def = (float)def;
+  float _rdmg = _dmg - ( _def / 500 * _dmg );
+  int rdmg = (float)(_rdmg + 0.5f);
+  cout << "You take a hit! -" << rdmg << "HP!" << endl;
+  curHealth -= rdmg;
 }
 
-void Player::use(string name) {
+int Player::use(string name) {
   unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
-    prompt();
+    return 0;
   }
 
   switch (i->type) {
@@ -101,9 +106,10 @@ void Player::use(string name) {
     break;
   default:
     cout << "Cannot use a " << i->name << endl;
-    prompt();
+    return 0;
     break;
   }
+  return 1;
 }
 
 void Player::useOn(string param1, string param2) {
@@ -111,11 +117,12 @@ void Player::useOn(string param1, string param2) {
   // param2 = obj in room
 
   unique_ptr<Item> i = move(findItemInv(param1));
-  removeFromInv(i);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
     return;
+  } else {
+    removeFromInv(i);
   }
 
   shared_ptr<Obj> _o = curRoom->findObject(param2);
@@ -142,43 +149,46 @@ void Player::useOn(string param1, string param2) {
   }
 }
 
-void Player::takeItem(string name) {
+int Player::takeItem(string name) {
   // add item to inventory
 
   vector<unique_ptr<Item>> &rItems = curRoom->items;
-  unique_ptr<Item> i;
+  unique_ptr<Item> i = nullptr;
 
   if (rItems.size() == 0) {
     cout << "Item not present in the room." << endl;
-    prompt();
+    return 0;
   }
+
 
   for (auto &item : rItems) {
     if (_toLower(item->name) == name) {
+      auto it = find(rItems.begin(), rItems.end(), item);
       i = move(item);
+      rItems.erase(it);
       break;
     }
   }
 
   if (i == nullptr) {
     cout << "Item not present in the room." << endl;
-    prompt();
+    return 0;
   }
 
   cout << "You took \"" << i->name << "\"." << endl;
 
   inv.push_back(move(i));
-  rItems.erase(find(rItems.begin(), rItems.end(), i));
+  return 1;
 }
 
-void Player::equipItem(string name) {
+int Player::equipItem(string name) {
   // Check if the item that is being equiped is within the inventory
 
   unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
-    prompt();
+    return 0;
   } else if (i->type == 2) {
 
     // weapon
@@ -211,6 +221,7 @@ void Player::equipItem(string name) {
   else {
     cout << "This item can not be equipped." << endl;
   }
+  return 1;
 }
 
 void Player::check() {
@@ -221,50 +232,67 @@ void Player::check() {
        << "\t" << def << " DP" << endl;
   cout << "|-------Inventory-------|" << endl;
   for (auto &item : inv) {
-    cout << "   -  " << item->name << endl;
+    string stat;
+    if (item->type == 0) {
+      cout << "   -  " << item->name << endl;
+      }
+    else {
+      if (item->type == 1) {
+	stat = "HP";
+      }
+      else if (item->type == 2) {
+	stat = "AP";
+      }
+      else if (item->type > 2 && item->type <= 6 ) {
+	stat = "DP";
+      } else {
+	stat = "BUUGIN";
+      }
+      cout << "   -  " << item->name << " (" << item->prop << " " << stat << ")" << endl;
+    }
   }
   cout << "|--------Clothes--------|" << endl;
   for (auto &item : clothes) {
     if (item == nullptr) {
       cout << "   -  Empty" << endl;
     } else {
-      cout << "   -  " << item->name << endl;
+      cout << "   -  " << item->name << " (" << item->prop << " DP)" << endl;
     }
   }
   cout << "|-------Equipped--------|" << endl;
   if (eqp == nullptr) {
     cout << "   -  Empty" << endl;
   } else {
-    cout << "   -  " << eqp->name << endl;
+    cout << "   -  " << eqp->name << " (" << eqp->prop << " AP)" << endl;
   }
   cout << "|-----------------------|" << endl;
 }
 
-void Player::inspect(string name) {
+int Player::inspect(string name) {
   unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     shared_ptr<Obj> o = curRoom->findObject(name);
     if (o == nullptr) {
       cout << "No item or object to inspect." << endl;
-      prompt();
+      return 0;
     } else {
       o->inspect();
-      return;
+      return 1;
     }
   } else {
     cout << i->desc << endl;
 
-    return;
+    return 1;
   }
 }
 
-void Player::discard(string name) {
+int Player::discard(string name) {
   unique_ptr<Item> i = findItemInv(name);
 
   if (i == nullptr) {
     cout << "Item not present in inventory." << endl;
-    prompt();
+    return 0;
   }
 
   if (i->type != 0) {
@@ -275,7 +303,9 @@ void Player::discard(string name) {
     i.reset();
   } else {
     cout << "This item seems important." << endl;
+    return 0;
   }
+  return 1;
 }
 
 void Player::unequip(string name) {
@@ -311,9 +341,7 @@ void Player::attack(string name) {
   entity->takeDamage(eqp->prop);
 }
 
-void Player::moveDir(string dir) {
-  cout << dir << endl;
-  cout << getRoomFromMap(x, y + 1) << endl;
+int Player::moveDir(string dir) {
   if (dir == "north" && getRoomFromMap(x, y + 1) != nullptr) {
     if (curRoom->blocks[0] == nullptr || curRoom->blocks[0]->isUsed) {
       clearScr();
@@ -361,14 +389,22 @@ void Player::moveDir(string dir) {
   } else {
     cout << "Can't move in that direction" << endl;
   }
+  return 0;
 }
 
-void Player::action() {
+int Player::action() {
   if (curHealth <= 0) {
     cout << "You fall to the floor in pain." << endl;
     death();
     game =false;
   }
-  prompt(); }
+  int val = prompt();
+  return val;
+}
 
-shared_ptr<Player> player = make_shared<Player>(50, vector<unique_ptr<Item>>{}, array<unique_ptr<Item>, 4>{}, make_unique<BrokenSword>());
+shared_ptr<Player> createPlayer() {
+  vector<unique_ptr<Item>> inv;
+  return make_shared<Player>(50, move(inv), array<unique_ptr<Item>, 4>{}, make_unique<BrokenSword>());
+}
+
+shared_ptr<Player> player = createPlayer();
