@@ -48,7 +48,7 @@ void initGame(int _x, int _y) {
 int main() {
   clearScr();
 
-  initGame(2, 4);
+  initGame(2, 2);
 
   // Start the game
   while (game) {
