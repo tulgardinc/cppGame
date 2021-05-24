@@ -15,12 +15,14 @@ using namespace std;
 #include "../headers/rooms.h"
 
 Player::Player(int _health, vector<unique_ptr<Item>> _inv,
-               array<unique_ptr<Item>, 4> _clothes, unique_ptr<Item> _eqp)
-    : maxHealth(_health), curHealth(_health) {
+               array<unique_ptr<Item>, 4> _clothes, unique_ptr<Item> _eqp) {
+  maxHealth = curHealth = _health;
   clothes = move(_clothes);
   inv = move(_inv);
   eqp = move(_eqp);
+  name = "player";
   calcDef();
+  isEnemy = false;
 };
 
 unique_ptr<Item> Player::findItemInv(string name) {
@@ -47,11 +49,13 @@ void Player::removeFromInv(unique_ptr<Item> &i) {
 
 void Player::moveTo(int _x, int _y) {
   shared_ptr<Room> &room = getRoomFromMap(_x, _y);
+  movePointer(room);
   curRoom = room;
   x = _x;
   y = _y;
   if (room->visited) {
     room->look();
+    room->listEnemies();
   } else {
     room->visited = true;
     room->init();
@@ -60,6 +64,7 @@ void Player::moveTo(int _x, int _y) {
 
 void Player::takeDamage(int dmg) {
   // hurt the player
+  cout << "You take a hit! -" << dmg << "HP!" << endl;
   curHealth -= dmg;
 }
 
@@ -96,6 +101,7 @@ void Player::use(string name) {
     break;
   default:
     cout << "Cannot use a " << i->name << endl;
+    prompt();
     break;
   }
 }
@@ -115,7 +121,7 @@ void Player::useOn(string param1, string param2) {
   shared_ptr<Obj> _o = curRoom->findObject(param2);
   if (_o == nullptr) {
     cout << "Object not peresent in the room." << endl;
-    player.inv.push_back(move(i));
+    player->inv.push_back(move(i));
     return;
   }
 
@@ -123,14 +129,14 @@ void Player::useOn(string param1, string param2) {
 
   if (o.canBeUsed) {
     if (o.isUsed) {
-      player.inv.push_back(move(i));
+      player->inv.push_back(move(i));
       cout << "Not much else to do here." << endl;
       return;
     } else {
       o.use(move(i));
     }
   } else {
-    player.inv.push_back(move(i));
+    player->inv.push_back(move(i));
     cout << "Nothing to do here." << endl;
     return;
   }
@@ -294,7 +300,20 @@ void Player::unequip(string name) {
   }
 }
 
+void Player::attack(string name) {
+  shared_ptr<Entity> entity = curRoom->findEntity(name);
+  if (entity == nullptr) {
+    cout << "There is no " << name << " in the room." << endl;
+    return;
+  }
+
+  cout << "You attack the " << name <<" -" << eqp->prop << "HP!" << endl;
+  entity->takeDamage(eqp->prop);
+}
+
 void Player::moveDir(string dir) {
+  cout << dir << endl;
+  cout << getRoomFromMap(x, y + 1) << endl;
   if (dir == "north" && getRoomFromMap(x, y + 1) != nullptr) {
     if (curRoom->blocks[0] == nullptr || curRoom->blocks[0]->isUsed) {
       clearScr();
@@ -344,4 +363,12 @@ void Player::moveDir(string dir) {
   }
 }
 
-Player player(50, {}, {}, make_unique<BrokenSword>());
+void Player::action() {
+  if (curHealth <= 0) {
+    cout << "You fall to the floor in pain." << endl;
+    death();
+    game =false;
+  }
+  prompt(); }
+
+shared_ptr<Player> player = make_shared<Player>(50, vector<unique_ptr<Item>>{}, array<unique_ptr<Item>, 4>{}, make_unique<BrokenSword>());

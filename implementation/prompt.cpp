@@ -13,7 +13,7 @@
 using namespace std;
 
 shared_ptr<Obj> findObj(string name) {
-  for (auto &obj : player.curRoom->objects) {
+  for (auto &obj : player->curRoom->objects) {
     if (obj->name == name) {
       return obj;
     }
@@ -28,7 +28,7 @@ void prompt() {
   cout << endl;
   cout << "-----------------" << endl;
   cout << "What will you do?" << endl;
-  cout << "(" << player.curHealth << "/" << player.maxHealth << " HP)"
+  cout << "(" << player->curHealth << "/" << player->maxHealth << " HP)"
        << " : ";
   getline(cin, ans);
   ans = _toLower(ans);
@@ -56,18 +56,20 @@ void prompt() {
     cout << "take <item> - Takes item and adds to inventory." << endl;
     cout << "equip <item> - Equip item form inventory." << endl;
     cout << "unequip <item> - Unequip item form inventory." << endl;
+    cout << "wait - Waits a turn." << endl;
+    cout << "quit - Leaves the game." << endl;
     cout << "discard <item> - Discard an item from your inventory (forever)."
          << endl;
     prompt();
   } else if (cmd == "check") {
     clearScr();
-    player.check();
+    player->check();
     prompt();
 
   } else if (cmd == "inspect") {
     if (param != "") {
 
-      player.inspect(param);
+      player->inspect(param);
       prompt();
 
     } else {
@@ -80,12 +82,12 @@ void prompt() {
     clearScr();
     cout << "You look around." << endl;
     cout << endl;
-    player.curRoom->look();
+    player->curRoom->look();
+    player->curRoom->listEnemies();
     prompt();
   } else if (cmd == "move") {
     if (param != "") {
-      player.moveDir(param);
-      prompt();
+      player->moveDir(param);
     }
   } else if (cmd == "use") {
 
@@ -95,13 +97,11 @@ void prompt() {
       auto cmd2 = ans.find("on");
       string param1 = ans.substr(cmd1 + 4, cmd2 - 5);
       string param2 = ans.substr(cmd2 + 3, ans.size());
-      player.useOn(param1, param2);
-      prompt();
+      player->useOn(param1, param2);
 
     } else if (param != "") {
 
-      player.use(param);
-      prompt();
+      player->use(param);
 
     } else {
       cout << "What will you use?" << endl;
@@ -118,13 +118,11 @@ void prompt() {
         _c->open();
       }
 
-      prompt();
     }
   } else if (cmd == "take") {
     if (param != "") {
 
-      player.takeItem(param);
-      prompt();
+      player->takeItem(param);
 
     } else {
       cout << "What will you take?" << endl;
@@ -134,7 +132,7 @@ void prompt() {
   } else if (cmd == "equip") {
     if (param != "") {
 
-      player.equipItem(param);
+      player->equipItem(param);
       prompt();
 
     } else {
@@ -145,7 +143,7 @@ void prompt() {
     }
   } else if (cmd == "discard") {
     if (param != "") {
-      player.discard(param);
+      player->discard(param);
       prompt();
     } else {
       cout << "What will you discard?" << endl;
@@ -154,7 +152,7 @@ void prompt() {
     }
   } else if (cmd == "unequip") {
     if (param != "") {
-      player.unequip(param);
+      player->unequip(param);
       prompt();
     }
     {
@@ -162,8 +160,21 @@ void prompt() {
       cout << "Usage: unequip <item>" << endl;
       prompt();
     }
+  } else if (cmd == "attack") {
+    if (param != "") {
+      player->attack(param);
+    } else {
+      cout << "Attack what?" << endl;
+      cout << "Usage: attack <entitiy>" << endl;
+      prompt();
+    }
+  } else if (cmd == "wait") {
+    cout << "You choose to wait" << endl;
+    return;
+  } else if (cmd == "quit") {
+    cout << "Bye :(" << endl;
+    game = false;
   }
-
   else {
     cout << "Invalid command, please type \"actions\" in order to view a list "
             "of possible actions."

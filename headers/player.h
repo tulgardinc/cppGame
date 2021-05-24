@@ -11,18 +11,15 @@ using namespace std;
 #include "item.h"
 #include "objects.h"
 #include "rooms.h"
+#include "entity.h"
 
 #pragma once
 
-class Player {
+class Player: public Entity {
 public:
-  int maxHealth;
-  int curHealth;
   int def = 0;
-  int x, y = 0;
   vector<unique_ptr<Item>> inv;
   array<unique_ptr<Item>, 4> clothes;
-  shared_ptr<Room>curRoom;
   unique_ptr<Item> eqp;
 
   Player(int _health, vector<unique_ptr<Item>> _inv, array<unique_ptr<Item>, 4> _clothes,
@@ -31,6 +28,8 @@ public:
   unique_ptr<Item> findItemInv(string name);
 
   void removeFromInv(unique_ptr<Item>& i);
+
+  void init(shared_ptr<Room> room);
 
   void moveTo( int _y, int _x);
 
@@ -55,6 +54,12 @@ public:
   void unequip(string name);
 
   void discard(string name);
+
+  void attack(string name);
+
+  void action();
 };
 
-extern Player player;
+extern shared_ptr<Player> player;
+
+extern bool game;

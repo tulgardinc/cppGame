@@ -43,7 +43,7 @@ void Chest::open() {
   }
   cout << "----+---+---+----" << endl;
 
-   vector<unique_ptr<Item>> &roomItems = player.curRoom->items;
+   vector<unique_ptr<Item>> &roomItems = player->curRoom->items;
    roomItems.insert(roomItems.end(), make_move_iterator(content.begin()), make_move_iterator(content.end()));
    isOpen = true;
 }
@@ -69,6 +69,6 @@ void TrapDoor::use(unique_ptr<Item> item) {
     cout << "Your crowbar broke, but you managed to open the trap door." << endl;
   } else {
     cout << "Cant use this here." << endl;
-    player.inv.push_back(move(item));
+    player->inv.push_back(move(item));
   }
 }

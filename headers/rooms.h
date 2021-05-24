@@ -13,23 +13,27 @@ using namespace std;
 
 #pragma once
 
+class Entity;
+
 class Room {
 public:
   string name;
   vector<shared_ptr<Obj>> objects;
   vector<unique_ptr<Item>> items;
-  array<shared_ptr<Obj>, 4> blocks{0}; // n e s w
+  array<shared_ptr<Obj>, 4> blocks{}; // n e s w
+  vector<shared_ptr<Entity>> entities{};
   bool visited = false;
+  int x, y;
   virtual void init() = 0;
   virtual void look() = 0;
   shared_ptr<Obj> findObject(string name);
+  shared_ptr<Entity> findEntity(string name);
   void printItems();
+  void listEnemies();
   void addToRoomVec(shared_ptr<Room> room);
   void setValues(string _n, vector<shared_ptr<Obj>> _o,
-                 vector<unique_ptr<Item>> _i);
+                 vector<unique_ptr<Item>> _i, vector<shared_ptr<Entity>> _e);
 };
-
-extern vector<shared_ptr<Room>> roomVec;
 
 extern array<array<shared_ptr<Room>, 5>, 5> gameMap;
 
